@@ -7,9 +7,6 @@ class Personnages {
     }
 
 }
-    function receive(damage) {
-        console.log(this.damage + 'has received.');
-    }
 
 
 class Weapon {
@@ -33,62 +30,89 @@ let monster = new Personnages('Grum', 25, club, 'monster');
 
 function buildPersonnages(){
     return personnage = new Personnages(prompt('entrer le nom de votre personnage'),
-        prompt('entrez le nombre de point de vie pour votre personnage'),
-        prompt('entrez larme de votre personnage : Epée/Gourdin'), prompt('votre personnage appartient à quelle équipe'));
+        parseInt(prompt('entrer le nombre de points de vie pour votre personnage')),
+        prompt('entrer larme de votre personnage : Epee/Gourdin'), prompt('votre personnage appartient a quelle equipe hero/monstre'));
 
 
 }
 
 function main () {
-    let nbPersonnage = prompt('entrez le nombre de personnage que vous voulez créer');
     let teams =[];
-    for( let i = 1; i<= nbPersonnage; i++){
+    for( let i = 1; i<= 2; i++){
         teams.push(buildPersonnages());
     }
     return teams;
 }
 
-
+function receive(defender) {
+    let dammage = 0;
+    for(let i=0; i< defender.length; i++){
+        console.log(defender[i]+' défend');
+        dammage = defender[i].healthPoints - 5;
+        console.log(defender[i].name + ' a perdu 5 points son nombre de Pvs est : ' + dammage);
+    }
+    return dammage;
+}
 
 function getRandom(array){
     return  array[Math.floor(Math.random() * array.length)];
 
 }
 
-function teams(){
-    let team = main();
-    let heros = team.filter(team => team.type ==='heros');
-    let monsters = team.filter(team => team.type ==='monstre');
-    console.log(heros);
-    console.log(monsters);
-    let attacker = [heros, monsters];
-    let response = prompt('voulez vous jouer un tour oui/non');
-    let random = getRandom(attacker);
-    console.log(random);
-        while(response && random.healthPoints > 0 ){
-        if(random = attacker[0]){
-            monsters.healthPoints = monsters.healthPoints  - 5;
-        }else{
-            heros.healthPoints = heros.healthPoints - 5;
-        }
-
-        }
-
-        if( monsters.healthPoints <= 0){
-           console.log(monsters.name + 'rejoint la cimetière' + heros.name+ 'a gagné avec'+ heros.healthPoints);
-        }else{
-            console.log(heros.name + 'rejoint la cimetière' + monsters.name+ 'a gagné avec'+ monsters.healthPoints);
-        }
-
-
-
-
-
-
-
+function attack(attacker) {
+    if(attacker.healthPoints > 0) {
+        console.log(attacker.name + ' attaque');
+    } else {
+        console.log(attacker.name + ' na plus de Pvs il rejoint la cimetiere')
+    }
 }
 
+function teams() {
+    let team = main();
+    console.log(team);
+    let hero = team.filter(team => team.type === 'hero');
+    console.log(hero);
+    let monster = team.filter(team => team.type === 'monstre');
+    console.log(monster);
+    random = getRandom(team);
+    let response = prompt('voulez vous jouer un tour oui/non');
+        if (response === 'oui') {
+            attack(random);
+            switch (random.type) {
+                case 'monstre':
+                    pvsHeros = receive(hero);
+                    console.log('hello hero');
+                    break;
+                case 'hero':
+                    pvsHeros = receive(monster);
+                    console.log('hello monstre');
+                    break;
+                default:
+                    console.log('desole cette equipe nexiste pas');
+            }
+        } else {
+            console.log('pas grave la prochaine fois')
+        }
+
+}
 let team = teams();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
