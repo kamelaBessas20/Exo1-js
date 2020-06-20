@@ -1,7 +1,6 @@
 let sword = new  Weapon('Excalibur', 0, 50, 1000);
 let club =  new Weapon('L\'abattoir', 0, 60, 1500);
 
-
 let hero = new Personnages('Arthur', 30, sword, 'hero');
 let monster = new Personnages('Grum', 25, club, 'monster');
 
@@ -10,8 +9,6 @@ function buildPersonnages(){
     return personnage = new Personnages(prompt('entrer le nom de votre personnage'),
         parseInt(prompt('entrer le nombre de points de vie pour votre personnage')),
         prompt('entrer larme de votre personnage : Epee/Gourdin'), prompt('votre personnage appartient a quelle equipe hero/monstre'));
-
-
 }
 
 function buildTeam () {
