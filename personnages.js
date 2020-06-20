@@ -5,9 +5,7 @@ class Personnages {
         this.weapon = weapon;
         this.type = type;
     }
-
 }
-
 
 class Weapon {
     constructor(weaponName, damagePoints, length, weight) {
@@ -16,8 +14,6 @@ class Weapon {
         this.length = length;
         this.weight = weight;
     }
-
-
 }
 
 let sword = new  Weapon('Excalibur', 0, 50, 1000);
@@ -28,17 +24,15 @@ let hero = new Personnages('Arthur', 30, sword, 'hero');
 let monster = new Personnages('Grum', 25, club, 'monster');
 
 
-function buildPersonnages(){
+function buildPersonnages() {
     return personnage = new Personnages(prompt('entrer le nom de votre personnage'),
         parseInt(prompt('entrer le nombre de points de vie pour votre personnage')),
         prompt('entrer larme de votre personnage : Epee/Gourdin'), prompt('votre personnage appartient a quelle equipe hero/monstre'));
-
-
 }
 
-function main () {
+function buildTeam () {
     let teams =[];
-    for( let i = 1; i<= 2; i++){
+    for ( let i = 1; i<= 2; i++) {
         teams.push(buildPersonnages());
     }
     return teams;
@@ -46,7 +40,7 @@ function main () {
 
 function receive(defender) {
     let dammage = 0;
-    for(let i=0; i< defender.length; i++){
+    for (let i=0; i< defender.length; i++) {
         console.log(defender[i]+' défend');
         dammage = defender[i].healthPoints - 5;
         console.log(defender[i].name + ' a perdu 5 points son nombre de Pvs est : ' + dammage);
@@ -54,9 +48,8 @@ function receive(defender) {
     return dammage;
 }
 
-function getRandom(array){
+function getRandom(array) {
     return  array[Math.floor(Math.random() * array.length)];
-
 }
 
 function attack(attacker) {
@@ -67,8 +60,8 @@ function attack(attacker) {
     }
 }
 
-function teams() {
-    let team = main();
+function main() {
+    let team = buildTeam();
     console.log(team);
     let hero = team.filter(team => team.type === 'hero');
     console.log(hero);
@@ -95,7 +88,7 @@ function teams() {
         }
 
 }
-let team = teams();
+main();
 
 
 
